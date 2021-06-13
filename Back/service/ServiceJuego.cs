@@ -25,6 +25,9 @@ namespace Back.service
             _db = context;
         }
 
+        //Métodos
+        //=================================================
+
         public void GuardaJuego(RequestJuego juego)
         {
             try
@@ -72,5 +75,39 @@ namespace Back.service
             }
         }
 
+        public void ActualizaJuego(int id, RequestJuego juego)
+        {
+            try
+            {
+                var game = _db.Juegos.Single(b => b.Id == id);
+                if (game != null)
+                {
+                    game.Nombre = juego.Nombre;
+                    game.TipoGenero = _db.Generos.Where(g => g.Id == juego.Genero).First();
+                    _db.SaveChanges();
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                throw new HttpException(new List<string> { "No fue posible actualizar el juego" }, HttpStatusCode.BadRequest);
+            }
+        }
+
+        public void EliminaJuego(int id)
+        {
+            try
+            {
+                var game = _db.Juegos.Single(b => b.Id == id);
+                if (game != null)
+                {
+                    _db.Juegos.Remove(game);
+                    _db.SaveChanges();
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                throw new HttpException(new List<string> { "No fue posible eliminar el juego" }, HttpStatusCode.BadRequest);
+            }
+        }
     }
 }

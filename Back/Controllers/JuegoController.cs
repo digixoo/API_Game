@@ -31,21 +31,24 @@ namespace Back.Controllers
         }
 
         // POST: api/Juego
-        public void Post([FromBody]RequestJuego juego)
+        public HttpResponseMessage Post([FromBody]RequestJuego juego)
         {
             _service.GuardaJuego(juego);
-            Request.CreateResponse(HttpStatusCode.Created);
+            return Request.CreateResponse(HttpStatusCode.Created);
         }
 
         // PUT: api/Juego/5
-        public void Put(int id, [FromBody]string value)
+        public HttpResponseMessage Put(int id, [FromBody]RequestJuego value)
         {
+            _service.ActualizaJuego(id, value);
+            return Request.CreateResponse(HttpStatusCode.Created);
         }
 
         // DELETE: api/Juego/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
-            throw new NotImplementedException();
+            _service.EliminaJuego(id);
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }

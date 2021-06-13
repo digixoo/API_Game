@@ -179,6 +179,7 @@
     <Compile Include="Controllers\JuegoController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Exception\HttpException.cs" />
+    <Compile Include="Filters\BasicAutenticationFilter.cs" />
     <Compile Include="Filters\HttpExceptionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

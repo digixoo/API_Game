@@ -8,6 +8,7 @@ namespace Back
         public static void Register(HttpConfiguration config)
         {
             // Configuración y servicios de API web
+            config.Filters.Add(new BasicAutenticationFilter());
             config.Filters.Add(new HttpExceptionFilter());
 
             // Rutas de API web
